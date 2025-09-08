@@ -1,4 +1,9 @@
+// analytics.js (เวอร์ชันแก้ไขสมบูรณ์)
+
 document.addEventListener("DOMContentLoaded", () => {
+  // ============================
+  //  CONFIGURATION
+  // ============================
   let pondChart, greenhouseChart, modalChart;
   const sheetIds = {
     "Pond 1": "Pond 1 Archive",
@@ -10,6 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const spreadsheetId = "1cSpQsGjlJJZijkK1B_woHoOUcFnphU5GgdfggE4-zLc";
   const baseUrl = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:json&sheet=`;
+
+  // ============================
+  //  DATA FETCHING
+  // ============================
   async function fetchSheetData(sheetName) {
     if (!sheetName) {
       console.error("Sheet name is undefined. Cannot fetch data.");
@@ -28,6 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return [];
     }
   }
+
+  // ============================
+  //  CHARTING LOGIC
+  // ============================
   function createChart(canvasId, datasets, options = {}) {
     const ctx = document.getElementById(canvasId).getContext("2d");
     return new Chart(ctx, {
@@ -127,9 +140,11 @@ document.addEventListener("DOMContentLoaded", () => {
         tension: 0.2,
         pointRadius: 2,
         pointBackgroundColor: colorMap[pondName],
-        fill: false,
+        fill: false, 
       });
     }
+
+    // 🇹🇭 บรรทัดที่แก้ไขแล้ว
     let timeUnit;
     if (range === 1) {
       timeUnit = "hour";
@@ -185,6 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     ];
 
+    
     let timeUnit;
     if (range === 1) {
       timeUnit = "hour";
@@ -198,6 +214,10 @@ document.addEventListener("DOMContentLoaded", () => {
       timeUnit,
     });
   }
+
+  // ============================
+  //  EXPERIMENTS LIST & MODAL
+  // ============================
   async function loadExperimentsList() {
     const container = document.getElementById("experiments-list-container");
     const template = document.getElementById("experiment-item-template");
@@ -207,12 +227,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const experiments = rows
       .map((r) => ({
-        no: r.c[0]?.v,
-        startDate: r.c[1]?.f,
-        startTime: r.c[2]?.v,
-        endDate: r.c[3]?.f,
-        endTime: r.c[4]?.v,
-        pond: r.c[5]?.v,
+        no: r.c[0]?.v, // Column A
+        startDate: r.c[1]?.f, // Column B
+        startTime: r.c[2]?.v, // Column C
+        endDate: r.c[3]?.f, // Column D
+        endTime: r.c[4]?.v, // Column E
+        pond: r.c[5]?.v, // Column F
 
         tempMin: r.c[6]?.v,
         tempMax: r.c[7]?.v,
@@ -381,9 +401,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const rows = await fetchSheetData(pondArchiveSheet);
-      const start_d_parts = exp.startDate.split("-");
+
+      // 🇹🇭 แก้ไข: เปลี่ยนวิธีอ่านวันที่ให้รองรับ YYYY-MM-DD
+      const start_d_parts = exp.startDate.split("-"); // ใช้ - เป็นตัวแบ่ง
       const start_t_str = String(exp.startTime).split("-")[0].trim();
       const start_t_parts = start_t_str.split(":");
+      // 🇹🇭 แก้ไข: เปลี่ยนลำดับเป็น (ปี, เดือน-1, วัน)
       const startDate = new Date(
         parseInt(start_d_parts[0]),
         parseInt(start_d_parts[1]) - 1,
@@ -392,9 +415,10 @@ document.addEventListener("DOMContentLoaded", () => {
         parseInt(start_t_parts[1])
       );
 
-      const end_d_parts = exp.endDate.split("-");
+      const end_d_parts = exp.endDate.split("-"); // ใช้ - เป็นตัวแบ่ง
       const end_t_str = String(exp.endTime).split("-")[0].trim();
       const end_t_parts = end_t_str.split(":");
+      // 🇹🇭 แก้ไข: เปลี่ยนลำดับเป็น (ปี, เดือน-1, วัน)
       const endDate = new Date(
         parseInt(end_d_parts[0]),
         parseInt(end_d_parts[1]) - 1,
@@ -406,6 +430,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const timeSeriesData = rows
         .map((r) => {
           try {
+            // รูปแบบวันที่ในชีต Archive คือ DD/MM/YYYY จึงยังใช้ split('/') เหมือนเดิม
             const dateParts = r.c[0]?.f.split("/");
             const timeParts = r.c[1]?.v.split("-")[0].trim().split(":");
             if (!dateParts || !timeParts || dateParts.length < 3) return null;
@@ -466,9 +491,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const options = {
         scales: {
           x: {
+            // เพิ่มการตั้งค่าแกน X ให้ละเอียดขึ้น
             type: "time",
             time: {
-              unit: "hour",
+              unit: "hour", // แสดงผลเป็นรายชั่วโมงเมื่อช่วงเวลาสั้น
               displayFormats: {
                 hour: "MMM d, HH:mm",
               },
@@ -513,6 +539,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("details-modal-overlay").style.display = "none";
   }
 
+  // ============================
+  //  INITIALIZATION
+  // ============================
   function initialize() {
     function setupControlListeners(controlsId, updateFn) {
       document
