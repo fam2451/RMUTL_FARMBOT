@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="main-content">
+        <div class="main-header">
+            <div class="sidenav-header">
+                <img src="img/Logo-RMUTL.png" class="sidenav-logo" />
+                <img src="img/FarmBot_Logo.png" class="sidenav-logo" />
+            </div>
+            <h1>ANALYTICS</h1>
+            <ul class="sidenav-menu">
+                <li><a href="dashboard.html"><span></span> Dashboard</a></li>
+                <li><a href="analytics.html"class="active"><span></span> Analytics</a></li>
+                <li><a href="events.html"><span></span> Events</a></li>
+                <li><a href="logs.html"><span></span> System logs</a></li>
+                <li><a href="#"><span></span> About Us</a></li>
+            </ul>
+            <div class="time-display">
+                <div id="currentTime" class="time">--:--:--</div>
+                <div class="timezone">GMT+7</div>
+            </div>
+        </div>
+        <div class="analytics-grid">
+            <div class="analytics-left-column">
+                <div class="card">
+                    <div class="card-header">Pond Overview</div>
+                    <div class="chart-controls">
+                        <div id="pond-metric-controls" class="control-group">
+                            <button class="control-btn active" data-metric="temp">Temp</button>
+                            <button class="control-btn" data-metric="ph">pH</button>
+                            <button class="control-btn" data-metric="tds">TDS</button>
+                        </div>
+                        <div id="pond-time-controls" class="control-group">
+                            <button class="control-btn" data-range="1">1D</button>
+                            <button class="control-btn" data-range="3">3D</button>
+                            <button class="control-btn active" data-range="7">7D</button>
+                            <button class="control-btn" data-range="30">1M</button>
+                        </div>
+                    </div>
+                    <div class="main-chart-container"><canvas id="pondChartCanvas"></canvas></div>
+                    <div id="pond-selector-controls" class="pond-checkbox-group">
+                        <h4>Ponds:</h4>
+                        <label><input type="checkbox" value="Pond 1" checked> 1</label>
+                        <label><input type="checkbox" value="Pond 2" checked> 2</label>
+                        <label><input type="checkbox" value="Pond 3" checked> 3</label>
+                        <label><input type="checkbox" value="Pond 4"> 4</label>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Local Overview</div>
+                    <div class="chart-controls">
+                        <div id="greenhouse-metric-controls" class="control-group">
+                            <button class="control-btn active" data-metric="temp">Temp</button>
+                            <button class="control-btn" data-metric="humidity">Humidity</button>
+                            <button class="control-btn" data-metric="lux">Lux</button>
+                        </div>
+                        <div id="greenhouse-time-controls" class="control-group">
+                            <button class="control-btn" data-range="1">1D</button>
+                            <button class="control-btn" data-range="3">3D</button>
+                            <button class="control-btn active" data-range="7">7D</button>
+                            <button class="control-btn" data-range="30">1M</button>
+                        </div>
+                    </div>
+                    <div class="main-chart-container"><canvas id="greenhouseChartCanvas"></canvas></div>
+                </div>
+            </div>
+            <div class="analytics-right-column">
+                <div class="card">
+                    <div class="card-header">Pond Experiments</div>
+                    <div id="experiments-list-container" class="experiments-list">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="details-modal-overlay" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-title"></h3>
+                <button id="modal-close-btn" class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-text-content"></div>
+                <h4 style="margin-top: 5px; margin-bottom: 5px; border-top: 1px solid #eee; padding-top: 15px;">
+                    Experiment Trend</h4>
+                <div class="modal-chart-container">
+                    <canvas id="modalChartCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template id="experiment-item-template">
+        <div class="exp-item-card">
+            <h4 class="exp-item-title" data-field="remark"></h4>
+            <div class="exp-item-body">
+                <div class="exp-item-stat"><span class="stat-label">Pond:</span><span data-field="pond"></span></div>
+                <div class="exp-item-stat"><span class="stat-label">Start Date:</span><span
+                        data-field="startDate"></span></div>
+                <div class="exp-item-stat"><span class="stat-label">Start Time:</span><span
+                        data-field="startTime"></span></div>
+                <div class="exp-item-stat"><span class="stat-label">End Date:</span><span data-field="endDate"></span>
+                </div>
+                <div class="exp-item-stat"><span class="stat-label">End Time:</span><span data-field="endTime"></span>
+                </div>
+            </div>
+            <div class="exp-item-footer">
+                <button class="event-detail-btn">Details</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="analytics.js"></script>
+</body>
+
+</html>

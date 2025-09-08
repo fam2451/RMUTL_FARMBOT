@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="main-content">
+    <div class="main-header">
+      <div class="sidenav-header">
+        <img src="img/Logo-RMUTL.png" class="sidenav-logo" />
+        <img src="img/FarmBot_Logo.png" class="sidenav-logo" />
+      </div>
+      <h1>DASHBOARD AND CONTROL</h1>
+      <ul class="sidenav-menu">
+        <li><a href="dashboard.html" class="active"><span></span> Dashboard</a></li>
+        <li><a href="analytics.html"><span></span> Analytics</a></li>
+        <li><a href="events.html"><span></span> Events</a></li>
+        <li><a href="logs.html"><span></span> System logs</a></li>
+        <li><a href="#"><span></span> About Us</a></li>
+      </ul>
+      <div class="time-display">
+        <div class="time" id="currentTime">--:--:--</div>
+        <div class="timezone">GMT+7</div>
+      </div>
+    </div>
+    <div class="dashboard-grid">
+      <div class="dashboard-left">
+        <div class="card next-events-card">
+          <div class="card-header">
+            <div class="card-title">Next Events</div>
+          </div>
+          <div class="card-content">
+            <div class="no-events"></div>
+            <template id="event-template">
+              <div class="event-row-wrapper">
+                <div class="event-row">
+                  <div class="event-row-left">
+                    <div class="event-icon-float">
+                      <img src="img/calendar.png" alt="icon" />
+                    </div>
+                    <span class="event-datetime"><b>DATE</b> TIME</span>
+                  </div>
+                  <div class="event-label">LABEL</div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+        <div class="card logs-card">
+          <div class="card-header">
+            <div class="card-title">System Logs</div>
+          </div>
+          <div class="card-content">
+            <div class="logs-container">
+              <div id="logs-content"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-right">
+        <div class="dashboard-right-row">
+          <div class="card farmbot-info-card">
+            <div class="card-header">
+              <div class="card-title">Infomation</div>
+            </div>
+            <span class="semi-header"> FarmBot</span>
+            <div class="card-content">
+              <div class="metrics-grid">
+                <div class="metric-card">
+                  <div class="metric-label">X</div>
+                  <div class="metric-value" id="farmbot-x">--</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-label">Y</div>
+                  <div class="metric-value" id="farmbot-y">--</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-label">Z</div>
+                  <div class="metric-value" id="farmbot-z">--</div>
+                </div>
+              </div>
+            </div>
+            <div class="semi-row">
+              <div class="semi-label">
+                <img src="img/processor.png" alt="WiFi Icon"> <span> Raspberry Pi CPU Temp</span>
+              </div>
+              <div class="semi-value" id="cpu-temp">--</div>
+            </div>
+            <div class="semi-row">
+              <div class="semi-label">
+                <img src="img/memory.png" alt="WiFi Icon"> <span> Raspberry Pi Memory Usage</span>
+              </div>
+              <div class="semi-value" id="cpu-memo">--</div>
+            </div>
+            <div class="semi-row">
+              <div class="semi-label">
+                <img src="img/wifi-icon.png" alt="WiFi Icon"> <span> WiFi Strength</span>
+              </div>
+              <div class="semi-value" id="wifi-str">--</div>
+            </div>
+            <div class="semi-row">
+              <div class="semi-label">
+                <img src="img/time.png" alt="WiFi Icon"> <span> Up Time</span>
+              </div>
+              <div class="semi-value" id="farmbot-uptime">--</div>
+            </div>
+            <div class="card-header">
+              <div class="card-title">Website Go</div>
+            </div>
+            <div class="btn-grid">
+              <button class="farmbot-btn" onclick="window.open('https://my.farm.bot/', '_blank')"
+                title="Farmbot Website">
+                <img src="/img/FarmBot_Logo.png" alt="FarmBot Logo"> </button>
+              <button class="farmbot-btn"
+                onclick="window.open('https://docs.google.com/spreadsheets/d/1cSpQsGjlJJZijkK1B_woHoOUcFnphU5GgdfggE4-zLc/edit?gid=114601854#gid=114601854', '_blank')"
+                title="Google Sheet">
+                <img src="/img/Sheet_Logo.png" alt="FarmBot Logo"> </button>
+            </div>
+          </div>
+          <div class="card greenhouse-card">
+            <div class="card-header">
+              <div class="card-title">Local</div>
+            </div>
+            <div class="card-content">
+              <div class="metrics-grid">
+                <div class="metric-card">
+                  <div class="metric-icon">
+                    <span class="icon">
+                      <img src="img/gtemp.png" alt="icon" />
+                    </span>
+                  </div>
+                  <div class="metric-value" id="greenhouse-temp">--</div>
+                  <div class="metric-label">Temp</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-icon"><span class="icon">
+                      <img src="img/ghum.png" alt="icon" />
+                    </span>
+                  </div>
+                  <div class="metric-value" id="greenhouse-humidity">--</div>
+                  <div class="metric-label">Humidity</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-icon">
+                    <span class="icon">
+                      <img src="img/glux.png" alt="icon" />
+                    </span>
+                  </div>
+                  <div class="metric-value" id="greenhouse-lux">--</div>
+                  <div class="metric-label">Light</div>
+                </div>
+              </div>
+              <div class="greenhouse-row">
+                <div class="card-header">
+                  <div class="card-title">Manual Control</div>
+                </div>
+                <div class="semi-header">
+                  <span> Move Positions </span><img src="img/move.png" alt="WiFi Icon">
+                </div>
+                <div class="card-container">
+                  <div class="manual-grid">
+                    <div class="manual-inputs">
+                      <div class="input-group">
+                        <label for="manual-x">X AXIS</label>
+                        <input type="number" id="manual-x" placeholder="X coordinate">
+                      </div>
+                      <div class="input-group">
+                        <label for="manual-y">Y AXIS</label>
+                        <input type="number" id="manual-y" placeholder="Y coordinate">
+                      </div>
+                      <div class="input-group">
+                        <label for="manual-z">Z AXIS</label>
+                        <input type="number" id="manual-z" placeholder="Z coordinate">
+                      </div>
+                    </div>
+                    <div class="manual-grid">
+                      <div class="input-group">
+                        <button id="manual-go-btn" class="Manual-btn icon-button " title="Go to Position">
+                          <img src="img/go.png" alt="Go">
+                        </button>
+                      </div>
+                    </div>
+                    <div class="manual-grid">
+                      <div class="input-group">
+                        <button id="find-home-btn" class="Manual-btn icon-button" title="Find home all axis">
+                          <img src="img/home.png" alt="Go">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="semi-header">
+                  <span class="semi-header">Peripherals <img src="img/peripherals.png" alt="WiFi Icon"></span>
+                </div>
+                <div class="card-container" id="peripherals-container">
+                  <template id="peripheral-row-template">
+                    <div class="peripheral-row">
+                      <span class="semi-label">PERIPHERAL_LABEL</span>
+                      <label class="switch">
+                        <input type="checkbox" class="peripheral-toggle" data-pin="PIN_NUMBER">
+                        <span class="slider round"></span>
+                      </label>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ponds-grid" id="ponds-grid">
+    </div>
+    <template id="pond-card-template">
+      <div class="card pond-card">
+        <div class="card-header" style="display: flex; gap:10px; align-items: center;">
+          <div class="card-title">POND_NAME</div>
+          <div class="pond-actions">
+            <button id="edit-btn" class="action-btn edit icon-button" title="Edit Pond">
+              <img src="img/edit.png" alt="Go">
+              <span> Edit</span>
+            </button>
+            <button id="delete-btn" class="action-btn delete icon-button" title="Delete Pond">
+              <img src="img/bin.png" alt="Go">
+              <span> Delete</span>
+            </button>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="metrics-grid">
+            <div class="metric-reading-grid">
+              <div class="metric-reading">
+                <div class="metric-icon"><span class="icon">
+                    <img src="img/axis.png" alt="icon" />
+                  </span>
+                </div>
+                <div class="pond-text">
+                  <div>
+                    <span class="metric-label-pond">X : </span>
+                    <span class="metric-value-pond pond-x">--mm</span>
+                  </div>
+                  <div>
+                    <span class="metric-label-pond">Y : </span>
+                    <span class="metric-value-pond pond-y">--mm</span>
+                  </div>
+                </div>
+
+              </div>
+              <div class="metric-reading ">
+                <div class="metric-icon"><span class="icon">
+                    <img src="img/ptemp.png" alt="icon" />
+                  </span>
+                </div>
+                <div class="pond-text">
+                  <span class="metric-value-pond pond-temp">--°C</span>
+                  <span class="metric-label-pond">Water Temp</span>
+                </div>
+              </div>
+              <div class="metric-reading">
+                <div class="metric-icon"><span class="icon">
+                    <img src="img/ptds.png" alt="icon" />
+                  </span>
+                </div>
+                <div class="pond-text">
+                  <span class="metric-value-pond pond-tds">--ppm</span>
+                  <span class="metric-label-pond">TDS</span>
+                </div>
+              </div>
+              <div class="metric-reading">
+                <div class="metric-icon"><span class="icon">
+                    <img src="img/pph.png" alt="icon" />
+                  </span>
+                </div>
+                <div class="pond-text">
+                  <span class="metric-value-pond pond-ph">--</span>
+                  <span class="metric-label-pond">pH </span>
+                </div>
+              </div>
+            </div>
+            <div class="metric-btn">
+              <button class="icon-btn run-sequence-btn" title="Run Measure Pond sequence">
+                <img src="img/measure.png" alt="Measure">
+                <div class="measure-box">
+                  <span class="measure-title">Measure</span>
+                  <span class="last-checked-time"></span>
+                </div>
+              </button>
+              <button class="icon-btn run-move-btn" title="Run Move to Pond sequence">
+                <img src="img/moveto.png" alt="Move">
+                <div class="measure-box">
+                  <span class="measure-title">Move</span>
+                </div>
+              </button>
+              <button class="icon-btn run-weed-btn" title="ให้ปุ๋ย (Fertilize)">
+                <img src="img/sprayer.png" alt="Fertilize">
+                <div class="measure-box">
+                  <span class="measure-title">ให้ปุ๋ย</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+    <div class="page-actions">
+      <button id="add-pond-btn" class="action-button">Add New Pond</button>
+    </div>
+    <div id="tds-input-modal" class="modal-overlay">
+      <div class="modal-content">
+        <h2 id="tds-input-modal-title">Calibrate TDS</h2>
+        <div class="form-group">
+          <label for="tds-input-value">TDS Value (ppm)</label>
+          <input type="number" id="tds-input-value" placeholder="ppm" required>
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="cancel-tds-input-btn" class="modal-btn-cancel">Cancel</button>
+          <button type="button" id="start-calibrate-btn" class="modal-btn-confirm">Start Calibrate</button>
+        </div>
+      </div>
+    </div>
+    <div id="weed-input-modal" class="modal-overlay">
+      <div class="modal-content">
+        <h2 id="weed-input-modal-title">ให้ปุ๋ย</h2>
+        <div class="form-group">
+          <label for="weed-input-value">ปริมาณปุ๋ย (ml)</label>
+          <input type="number" id="weed-input-value" placeholder="ระบุปริมาณเป็น ml" required>
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="cancel-weed-input-btn" class="modal-btn-cancel">ยกเลิก</button>
+          <button type="button" id="start-weed-btn" class="modal-btn-confirm">ยืนยัน</button>
+        </div>
+      </div>
+    </div>
+    <!-- Add Pond Modal -->
+    <div id="confirm-action-modal" class="modal-overlay">
+      <div class="modal-content">
+        <h2 id="confirm-modal-title">ยืนยันการทำงาน</h2>
+        <p id="confirm-modal-text">คุณแน่ใจหรือไม่ว่าต้องการทำรายการนี้?</p>
+
+        <div class="modal-actions" id="confirm-modal-actions">
+          <button type="button" id="cancel-confirm-btn" class="modal-btn-cancel">Cancel</button>
+          <button type="button" id="confirm-action-btn" class="modal-btn-confirm">Confirm</button>
+        </div>
+      </div>
+    </div>
+    <div id="add-pond-modal" class="modal-overlay">
+      <div class="modal-content">
+        <form id="add-pond-form">
+          <h2>Add New Pond</h2>
+
+          <div id="add-pond-form-content">
+            <div class="form-group">
+              <p id="auto-pond-name" class="auto-name-display">-- Loading Name --</p>
+            </div>
+            <div class="form-group">
+              <label for="pond-x-input">X axis</label>
+              <input type="number" id="pond-x-input" placeholder="Position of the X axis" required>
+            </div>
+            <div class="form-group">
+              <label for="pond-y-input">Y axis</label>
+              <input type="number" id="pond-y-input" placeholder="Position of the Y axis" required>
+            </div>
+          </div>
+          <div id="add-loading" class="modal-loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Starting add new pond Please wait........</p>
+          </div>
+
+          <div class="modal-actions" id="add-modal-actions">
+            <button type="button" id="cancel-pond-btn" class="modal-btn-cancel">Cancel
+            </button>
+            <button type="submit" id="modal-btn-save" class="modal-btn-save" title="Save">
+              <span>Save Changes</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="edit-pond-modal" class="modal-overlay">
+      <div class="modal-content">
+        <form id="edit-pond-form">
+          <h2 id="edit-modal-title">Edit Pond</h2>
+
+          <div id="edit-pond-form-content">
+            <div class="form-group">
+              <label for="edit-pond-x-input">Edit X axis</label>
+              <input type="number" id="edit-pond-x-input" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-pond-y-input">Edit Y axis</label>
+              <input type="number" id="edit-pond-y-input" required>
+            </div>
+            <div class="form-group-checkbox">
+              <label>
+                <input type="checkbox" id="edit-include-measure-all">
+                Measure All
+              </label>
+            </div>
+          </div>
+
+          <div id="edit-loading" class="modal-loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Starting save Please wait .........</p>
+          </div>
+
+          <div class="modal-actions" id="edit-modal-actions">
+            <button type="button" id="cancel-edit-btn" class="modal-btn-cancel">Cancel</button>
+            <button type="submit" class="modal-btn-save">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- START: Delete Confirmation Modal -->
+    <div id="delete-pond-modal" class="modal-overlay">
+      <div class="modal-content">
+        <h2 id="delete-modal-title">Delete Confirmation</h2>
+        <p id="delete-modal-text">คุณแน่ใจหรือไม่ว่าต้องการลบบ่อนี้และซีเควนซ์ที่เกี่ยวข้องทั้งหมด?</p>
+
+        <!-- Loading Indicator -->
+        <div id="delete-loading" class="modal-loading" style="display: none;">
+          <div class="spinner"></div>
+          <p>Starting Deltete Please Wait.......</p>
+        </div>
+
+        <div class="modal-actions" id="delete-modal-actions">
+          <button type="button" id="cancel-delete-btn" class="modal-btn-cancel">Cancel</button>
+          <button type="button" id="confirm-delete-btn" class="modal-btn-delete">Confirm</button>
+        </div>
+      </div>
+    </div>
+    <!-- END: Delete Confirmation Modal -->
+    <div id="calibrate-status-modal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="calibrate-modal-title">Calibrating Pond</h2>
+          <span class="close-btn" id="close-calibrate-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="calibration-details">
+            <p>Target TDS: <b id="calibrate-target-tds">N/A</b></p>
+            <p>Acceptable Range: <b id="calibrate-range">N/A</b></p>
+          </div>
+          <hr>
+          <div class="calibration-status">
+            <div class="spinner" id="calibrate-spinner" style="display: none;"></div>
+            <p id="calibrate-status-text">Starting...</p>
+            <p>Latest Reading: <b id="calibrate-latest-tds">N/A</b></p>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="force-close-calibrate-btn" class="modal-btn-cancel">Force Close</button>
+        </div>
+      </div>
+    </div>
+    <!-- START: Toast Notification -->
+    <div id="toast-notification" class="toast">
+      <div class="toast-content">
+        <i class="toast-icon"></i>
+        <div class="toast-message">
+          <span class="toast-text-1"></span>
+          <span class="toast-text-2"></span>
+        </div>
+      </div>
+      <div class="toast-progress"></div>
+    </div>
+    <!-- END: Toast Notification -->
+
+    <div class="timestamp">Time <span id="time-stamp">--:--:--</span> GMT + 7</div>
+  </div>
+  <script src="dashboard.js"></script>
+</body>
+
+</html>

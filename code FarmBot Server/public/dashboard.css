@@ -1,0 +1,1258 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap');
+
+body {
+    font-family: 'Noto Sans Thai', sans-serif;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.main-content {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.card {
+    background: #fff;
+    padding: 12px;
+    transition: all 0.3s ease-in-out;
+    flex: 1 1 0;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    padding: 12px;
+    margin-bottom: 0;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    color: #000000;
+    font-weight: bolder;
+    font-size: 16px;
+    padding: 0px;
+    align-items: center;
+}
+
+
+.card-container {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.sidenav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background: #FFFFFF;
+    box-shadow: 2px 0 10px 0 rgba(0, 0, 0, 0.08);
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.sidenav-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0px;
+    gap: 10px;
+}
+
+.sidenav-logo {
+    height: 60px;
+    width: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.sidenav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    margin-left: 50px;
+    gap: 20px;
+}
+
+.sidenav-menu a {
+    display: flex;
+    align-items: center;
+    color: #2e2e1c;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px 5px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.sidenav-menu a:hover,
+.sidenav-menu a.active {
+    background: #e7efc7;
+    color: #3ca55c;
+}
+
+.main-header {
+    position: -webkit-sticky;
+    position: sticky;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 12px 0px 12px;
+    background: #fff;
+    border-radius: 0 0 18px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 12px 0 #0001;
+    z-index: 100;
+    top: 0;
+}
+
+.main-header h1 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    color: #000000;
+    letter-spacing: 1px;
+}
+
+.time-display {
+    text-align: right;
+}
+
+.time-display .time {
+    font-size: 12px;
+    font-weight: 600;
+    color: #222;
+}
+
+.time-display .timezone {
+    font-size: 12px;
+    color: #000000;
+}
+
+.dashboard-grid {
+    display: flex;
+    grid-template-columns: 1fr 2fr;
+    gap: 12px;
+    align-items: stretch;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dashboard-left,
+.dashboard-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+}
+
+.dashboard-right-row {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+}
+
+.ponds-grid {
+    display: grid;
+    margin-top: 12px;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 12px;
+}
+
+.pond-card .metric-card {
+    border-radius: 8px;
+    padding: 2px 2px;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.metric-card {
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.metric-label {
+    font-size: 12px;
+    font-weight: normal;
+    color: #000000;
+    margin-bottom: 0px;
+    text-align: center;
+    align-items: center;
+}
+
+.metric-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #00809D;
+    text-align: center;
+    align-items: center;
+    
+}
+
+.metric-label-pond {
+    font-size: 12px;
+    font-weight: normal;
+    color: #000000;
+    margin-bottom: 0px;
+    text-align: center;
+    align-items: center;
+
+}
+
+.metric-value-pond {
+    font-size: 16px;
+    font-weight: 600;
+    color: #00809D;
+    text-align: center;
+    align-items: center;
+
+}
+
+.metric-icon .icon img {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    align-items: center;
+}
+
+.metric-icon-pond .icon img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.semi-header {
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 5px;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.semi-header img {
+    height: 15px;
+    width: 15px;
+    object-fit: contain;
+    align-items: center;
+}
+
+.semi-label {
+    font-weight: 500;
+    font-size: 12px;
+    margin-left: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.semi-label img {
+    width: 12px;
+    /* กำหนดขนาดไอคอน */
+    height: 12px;
+}
+
+.semi-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-left: 20px;
+}
+
+.semi-icon {
+    height: 10px;
+    width: 100%;
+}
+
+.semi-value {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 40px;
+    color: #00809D;
+}
+
+.logs-container {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.log-entry {
+    color: #000000;
+    border-radius: 0px;
+    font-size: 10px;
+    margin-bottom: 0;
+}
+
+.event-row-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.event-icon-float {
+    align-items: stretch;
+    height: 40px;
+    width: 40px;
+    margin-right: 20px;
+}
+
+.event-icon-float img {
+    height: 40px;
+    width: 100%;
+}
+
+.event-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.event-row-left {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    width: 200px;
+
+}
+
+.event-datetime {
+    color: #555;
+    font-size: 12px;
+    flex-direction: column;
+    display: flex;
+}
+
+.event-datetime b {
+    color: #111;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.event-label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #222;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 40px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ee4e43;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 5px;
+    bottom: 4.5px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #387654;
+}
+
+input:checked+.slider:before {
+    transform: translateX(25px);
+}
+
+.slider:after {
+    content: "";
+    color: white;
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input:checked+.slider:after {
+    content: "";
+    left: 12px;
+}
+
+
+.farmbot-btn {
+    /* ปรับขนาดและรูปทรง */
+    width: 90px;
+    /* กำหนดความกว้างของปุ่ม */
+    height: 48px;
+    /* กำหนดความสูงของปุ่ม */
+    padding: 0;
+    /* เอา padding เดิมออก */
+    border-radius: 8px;
+    /* ทำให้ปุ่มเป็นวงกลม */
+
+    /* ใช้ Flexbox เพื่อจัดโลโก้ให้อยู่กึ่งกลาง */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    box-shadow: 0 2px 5px 0 #0002;
+    transition: all 0.2s;
+    outline: none;
+    background: #d0d0d0;
+    padding: 5px;
+}
+
+/* 2. ปรับขนาดของรูปโลโก้ให้พอดีกับปุ่ม */
+.farmbot-btn img {
+    width: 100%;
+    /* ให้ความกว้างปรับตามสัดส่วนอัตโนมัติ */
+}
+
+
+.farmbot-btn:hover {
+    background: #3F7D58;
+}
+
+.timestamp {
+    text-align: right;
+    font-size: 14px;
+}
+
+/* === NEW CSS FOR METRIC READING LAYOUT === */
+.metric-reading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    margin-top: 0px;
+    border-radius: 8px;
+    padding: 2px 2px;
+    text-align: center;
+    background-color: #f5f5f5;
+    margin-top: 10px;
+}
+
+
+.pond-card .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pond-card .metric-reading {
+    display: flex;
+    gap: 8px;
+}
+.pond-card .metric-reading-grid {
+    display: flex;
+    gap: 8px;
+}
+.pond-card .metric-reading {
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+
+.metric-reading .metric-value,
+.metric-reading .metric-label {
+    display: inline;
+    margin-bottom: 0;
+}
+
+/* เพิ่มท้ายไฟล์ dashboard.css */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    border-radius: 0.5em;
+    margin-top: 10px;
+    width: 200px;
+}
+
+.action-buttons .farmbot-btn {
+    width: 100%;
+    border-radius: 0.5em;
+    margin-left: 0;
+}
+
+/* --- Manual Control Card Styles --- */
+.manual-inputs {
+    display: flex;
+    gap: 10px;
+    margin: 2px 0;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    /* สำคัญมาก */
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.Manual-btn {
+    width: 100%;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.7em 2.2em;
+    cursor: pointer;
+    box-shadow: 0 2px 5px 0 #0002;
+    transition: all 0.2s;
+    outline: none;
+    margin-top: 12px;
+    margin-left: 0px;
+    background: #d0d0d0;
+}
+
+.Manual-btn:hover {
+    background: #EB5B00;
+}
+
+.manual-grid {
+    display: grid;
+    margin-top: 0px;
+    grid-template-columns: 3fr 0.2fr 0.2fr;
+    gap: 2px;
+}
+
+/* --- Pond Management & Actions --- */
+.dashboard-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 5px;
+}
+
+.dashboard-section-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.pond-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0 5px;
+    opacity: 0.6;
+}
+
+.action-btn:hover {
+    opacity: 1;
+}
+
+.measure-control {
+    margin-top: 15px;
+    text-align: center;
+    padding-top: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.measure-control label {
+    font-size: 12px;
+    color: #333;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ปรับสไตล์ปุ่ม #manual-go-btn ให้เป็นปุ่มไอคอน */
+#manual-go-btn {
+    /* กำหนดขนาดให้เป็นสี่เหลี่ยม */
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-left: 5px;
+    background: #B1D690;
+}
+
+#manual-go-btn:hover {
+    background: #7cba45;
+    transform: scale(1.1);
+}
+
+/* ปรับขนาดรูปไอคอนข้างในปุ่ม "Go" */
+#manual-go-btn img {
+    width: 30px;
+    height: 30px;
+}
+
+
+.Group-btn {
+    width: 100%;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7em 2.2em;
+    cursor: pointer;
+    box-shadow: 0 2px 5px 0 #0002;
+    transition: all 0.2s;
+    outline: none;
+    margin-top: 12px;
+    margin-left: 0px;
+    background: #d0d0d0;
+}
+
+.Group-btn:hover {
+    background: #EB5B00;
+}
+
+#find-home-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    background: #F3C623;
+
+}
+
+#find-home-btn:hover {
+    background: #daad0b;
+    transform: scale(1.1);
+}
+
+
+/* ปรับขนาดรูปไอคอนข้างในปุ่ม "Go" */
+#find-home-btn img {
+    width: 30px;
+    height: 30px;
+}
+
+.peripheral-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 0;
+    margin-bottom: 5px;
+}
+
+/* ปรับขนาดสวิตช์ในแถวนี้ให้เหมาะสม */
+.peripheral-row .switch {
+    width: 50px;
+    height: 25px;
+}
+
+.peripheral-row .slider.round {
+    --slider-width: 12px;
+    /* ค่านี้อาจจะต้องปรับตาม CSS เดิมของคุณ */
+}
+
+.switch.is-loading .slider {
+    background-color: #ccc !important;
+    /* เปลี่ยนเป็นสีเทา */
+    cursor: wait;
+    /* เปลี่ยนเคอร์เซอร์เป็นรูปนาฬิกาทราย */
+}
+
+/* dashboard.css */
+
+/* --- เพิ่มโค้ดนี้ที่ท้ายไฟล์ --- */
+
+/* เมื่อสวิตช์อยู่ในสถานะ is-loading... */
+.switch.is-loading .slider:before {
+    /* สั่งให้จุดของสวิตช์เคลื่อนมาอยู่กึ่งกลาง
+    (ค่า 25px คือครึ่งหนึ่งของระยะการเคลื่อนที่ทั้งหมด 50px ของคุณ)
+  */
+    transform: translateX(12.5px);
+}
+
+.event-color-red .event-row {
+    background-color: #CB0404;
+}
+
+.event-color-blue .event-row {
+    background-color: #309898;
+}
+
+.event-color-green .event-row {
+    background-color: #B1D690;
+}
+
+.event-color-yellow .event-row {
+    background-color: #F3C623;
+}
+
+.event-color-orange .event-row {
+    background-color: #FFA24C;
+}
+
+.event-color-purple .event-row {
+    background-color: #D7C3F1;
+}
+
+.event-color-pink .event-row {
+    background-color: #FF8C9E;
+}
+
+.event-color-gray .event-row {
+    background-color: #BAD8B6;
+}
+
+#edit-btn {
+    width: auto;
+    height: 30px;
+    border-radius: 4px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F3C623;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Noto Sans Thai', sans-serif;
+    gap: 5px;
+}
+
+#edit-btn:hover {
+    background: #daad0b;
+    transform: scale(1.1);
+}
+
+/* ปรับขนาดรูปไอคอนข้างในปุ่ม "Go" */
+#edit-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+#delete-btn {
+    width: auto;
+    height: 30px;
+    border-radius: 4px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ee4e43;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Noto Sans Thai', sans-serif;
+    gap: 5px;
+}
+
+#delete-btn:hover {
+    background: #b53931;
+    transform: scale(1.1);
+}
+
+/* ปรับขนาดรูปไอคอนข้างในปุ่ม "Go" */
+#delete-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+
+.page-actions {
+    display: flex;
+    justify-content: center; /* จัดปุ่มให้อยู่กึ่งกลาง */
+    gap: 15px;               /* ระยะห่างระหว่างปุ่ม */
+    margin-top: 20px;        /* ระยะห่างจากรายการบ่อด้านบน */
+    margin-bottom: 20px;     /* ระยะห่างจาก timestamp ด้านล่าง */
+}
+
+.action-button {
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3ca55c;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width:100%;
+}
+
+.action-button:hover {
+    background-color: #328a4c;
+}
+
+/* --- Modal Styles --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none; /* ซ่อนไว้ก่อน */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 400px;
+    align-items: center;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+    align-items: center;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+        align-items: center;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.modal-btn-cancel {
+    background-color: #f0f0f0;
+    color: #333;
+}
+.modal-btn-cancel:hover {
+    background-color: #e0e0e0;
+}
+
+.modal-btn-save {
+    background-color: #3ca55c;
+    color: #fff;
+    align-items: center;
+    font-size: 20px;
+    gap: 20px;
+}
+.modal-btn-save img {
+    height: 20px;
+    width: 20px;
+    align-items: center;
+}
+.modal-btn-save:hover {
+    background-color: #328a4c;
+}
+
+/* --- Style for Auto Pond Name Display --- */
+.auto-name-display {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    margin: 0;
+}
+/* START: Styles for Delete Modal & Loading */
+.modal-btn-delete {
+    background-color: #ee4e43; /* สีแดงสำหรับการลบ */
+    color: #fff;
+}
+.modal-btn-delete:hover {
+    background-color: #d13c32;
+}
+
+.modal-loading {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3; /* สีเทาอ่อน */
+    border-top: 4px solid #3ca55c; /* สีเขียว */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 0.5s linear infinite;
+    margin: 0 auto 10px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.toast {
+    position: fixed;
+    top: 25px;
+    right: 30px;
+    border-radius: 12px;
+    background: #fff;
+    padding: 20px 35px 20px 25px;
+    box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transform: translateX(calc(100% + 30px));
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 9999;
+    opacity: 0;
+}
+
+.toast.active {
+    transform: translateX(0%);
+    opacity: 1;
+}
+
+.toast .toast-content {
+    display: flex;
+    align-items: center;
+}
+
+.toast-content .toast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 35px;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 50%;
+}
+
+/* Success Style */
+.toast.success .toast-icon { background-color: #3ca55c; }
+.toast.success .toast-progress:before { background-color: #3ca55c; }
+
+/* Error Style */
+.toast.error .toast-icon { background-color: #e74c3c; }
+.toast.error .toast-progress:before { background-color: #e74c3c; }
+
+
+.toast-content .toast-message {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}
+
+.toast-message .toast-text-1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.toast-message .toast-text-2 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+}
+
+.toast .toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+}
+
+.toast .toast-progress:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.toast.active .toast-progress:before {
+    animation: progress 3s linear forwards;
+}
+
+@keyframes progress {
+    100% {
+        right: 100%;
+    }
+}
+/* ================================= */
+/* == END: Toast Notification CSS == */
+/* ================================= */
+
+.form-group-checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 6px;
+}
+
+.form-group-checkbox label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.form-group-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+}
+.text-icon{
+    align-items: center;
+}
+
+.add-modal-actions{
+    align-items: center;
+}
+
+.icon-btn {
+    background-color: #B1D690;
+    border: none;
+    border-radius: 8px; /* ทำให้ขอบมน */
+    width: auto;
+    height: 48px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 10px;
+}
+
+.icon-btn:hover {
+    background-color: #3ca55c;
+    transform: scale(1.05); /* ขยายเล็กน้อยเมื่อ hover */
+}
+
+.icon-btn:active {
+    transform: scale(0.95); /* ย่อเล็กน้อยเมื่อกด */
+}
+
+.icon-btn img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.card-title-wrapper {
+    display: flex;
+    align-items: baseline; 
+    gap: 10px;
+    font-family: 'Noto Sans Thai', sans-serif;             
+}
+
+.last-checked-time {
+    font-size: 12px;
+    font-weight: normal;
+    color: #6c757d; /* สีเทาเข้ม */
+}
+.measure-box{
+    display: flex;
+    flex-direction: column;
+}
+.measure-title{
+    display: flex;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Noto Sans Thai', sans-serif;
+}
+
+.metric-btn
+{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 10px;
+}
+.pond-text{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-btn-confirm {
+    background-color: #3ca55c; /* สีเขียวเหมือนปุ่ม Save */
+    color: #fff;
+}
+.modal-btn-confirm:hover {
+    background-color: #328a4c;
+}
+
+/* ในไฟล์ dashboard.css (วางไว้ท้ายไฟล์) */
+
+/* Styles for Calibration Status Modal */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.close-btn {
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-body {
+    width: 100%;
+}
+
+.calibration-details p, .calibration-status p {
+    margin: 8px 0;
+}
+
+.calibration-status {
+    text-align: center;
+    padding: 15px 0;
+}
+
+#calibrate-latest-tds {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #3ca55c;
+}
+
+.run-weed-btn {
+    background-color: #B1D690;
+}
+
+.run-weed-btn:hover {
+    background-color:#3ca55c; /* สีน้ำตาล Sienna (เมื่อเมาส์ชี้) */
+}

@@ -1,0 +1,58 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Logs</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- เพิ่มลิงก์ฟอนต์ที่นี่ -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="main-content">
+    <div class="main-header">
+      <div class="sidenav-header">
+        <img src="img/Logo-RMUTL.png" class="sidenav-logo" />
+        <img src="img/FarmBot_Logo.png" class="sidenav-logo" />
+      </div>
+      <h1>SYSTEM LOGS</h1>
+      <ul class="sidenav-menu">
+        <li><a href="dashboard.html"><span></span> Dashboard</a></li>
+        <li><a href="analytics.html"><span></span> Analytics</a></li>
+        <li><a href="events.html"><span></span> Events</a></li>
+        <li><a href="logs.html" class="active"><span></span> System logs</a></li>
+        <li><a href="#"><span></span> About Us</a></li>
+      </ul>
+      <div class="time-display">
+        <div class="time" id="currentTime">--:--:--</div>
+        <div class="timezone">GMT+7</div>
+      </div>
+    </div>
+    <div class="logs-full-section">
+      <div class="logs-header">
+        <h2>System Logs</h2>
+        <button id="refresh-logs-btn">Refresh</button>
+      </div>
+      <div class="logs-full-container">
+        <div id="logs-full-content"></div>
+      </div>
+    </div>
+  </div>
+  <script src="logs.js"></script>
+  <template id="event-card-template">
+    <div class="event-row-wrapper">
+      <span class="event-icon-float">
+        <img src="/img/Calender.png" alt="icon" />
+      </span>
+      <div class="event-row">
+        <div class="event-row-left">
+          <span class="event-datetime"><b>DATE</b> TIME</span>
+        </div>
+        <div class="event-label">LABEL</div>
+      </div>
+    </div>
+  </template>
+  <script src="logs.js"></script>
+</body>
+
+</html>
