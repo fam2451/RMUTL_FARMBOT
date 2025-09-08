@@ -337,10 +337,12 @@ function handleDetailClick(event) {
   modalTitle.textContent = `Details for: ${eventName}`;
   modalBody.innerHTML = "";
   modal.style.display = "flex";
+  // MODIFIED: Pass the color to the fetch function
   fetchAndDisplaySequence(executable_id, modalBody, sequenceInfo.color);
 }
 
 async function fetchAndDisplaySequence(sequenceId, containerElement, color) {
+  // MODIFIED: Added color parameter
   try {
     const res = await fetch(`/api/sequence/${sequenceId}`);
     if (!res.ok) throw new Error(`Failed to fetch sequence ${sequenceId}`);
@@ -350,12 +352,14 @@ async function fetchAndDisplaySequence(sequenceId, containerElement, color) {
       return (containerElement.innerHTML = "<p>This sequence is empty.</p>");
     }
     for (const step of sequence.body) {
+      // MODIFIED: Pass color to the step card creator
       containerElement.appendChild(createStepCard(step, color));
       if (step.kind === "execute" && step.args.sequence_id) {
         const nestedContainer = document.createElement("div");
         nestedContainer.style.cssText =
           "margin-left: 40px; border-left: 3px solid #e0e0e0; padding-left: 15px; margin-top: -10px; margin-bottom: 10px;";
         containerElement.appendChild(nestedContainer);
+        // MODIFIED: Pass original color down to nested sequences
         await fetchAndDisplaySequence(
           step.args.sequence_id,
           nestedContainer,
@@ -369,10 +373,12 @@ async function fetchAndDisplaySequence(sequenceId, containerElement, color) {
   }
 }
 function createStepCard(step, color) {
-
+  // MODIFIED: Added color parameter
   const template = document
     .getElementById("step-card-template")
     .content.cloneNode(true);
+
+  // MODIFIED: Add color class to the step card element
   const stepCard = template.querySelector(".step-card");
   if (color) {
     stepCard.classList.add(`event-color-${color}`);
@@ -382,7 +388,7 @@ function createStepCard(step, color) {
   const bodyList = template.querySelector(".step-body ul");
   header.textContent = step.kind.replace(/_/g, " ").toUpperCase();
   let detailsHtml = "";
-
+  // ... (switch statement remains the same)
   switch (step.kind) {
     case "move_absolute":
     case "move":
@@ -624,3 +630,4 @@ function renderCalendar() {
   calendarHTML += `</div>`;
   container.innerHTML = calendarHTML;
 }
+
